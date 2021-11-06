@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 
-void permute(int *, int, int);
+void permute(int *, int, int, int, int);
 void swap(int*, int, int);
 void printArray( int*, int);
 
@@ -20,7 +20,7 @@ int main(int argc, char **argv)
     MPI_Init(&argc, &argv);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &p);
-
+   
     if(argc != 2){
       if (!rank)
            fprintf(stderr, "\n\nUsage: %s <max_number>\n\n", argv[0]);
@@ -40,7 +40,7 @@ int main(int argc, char **argv)
     elapsed_time =-MPI_Wtime();
 
     
-    permute( A, 0, input);
+    permute( A, 0, input, rank, p);
 
     
     elapsed_time += MPI_Wtime();
@@ -49,6 +49,8 @@ int main(int argc, char **argv)
     }
     
     MPI_Finalize();
+    
+    free(A), A = NULL;
 
     return 0;
 
@@ -79,32 +81,33 @@ void printArray( int* a, int len)
 
 
 /* permute an array recursively */
-void permute(int *arr, int start, int end)
+void permute(int *arr, int start, int end, int rank, int p)
 {
+    if(arr[0] <= (rank+1)*end/p){
+        int i;
 
+        if(start == end) /* this function is done */
+        {
+         //printArray(arr, end);
+         return;
+        }
 
-   int i;
+        permute(arr, start + 1, end, rank, p); /* start at next element */
 
-   if(start == end) /* this function is done */
-   {
-     printArray(arr, end);
-     return;
-   }
+        /* permute remaining elements recursively */
+        for(i = start + 1; i < end; i++)
+        {
+           if( arr[start] == arr[i] ) continue; /* skip */
 
-   permute(arr, start + 1, end); /* start at next element */
+           swap(arr, start, i);
 
-   /* permute remaining elements recursively */
-   for(i = start + 1; i < end; i++)
-   {
-       if( arr[start] == arr[i] ) continue; /* skip */
- 
-       swap(arr, start, i);
-       
-       permute(arr, start + 1, end);
+           permute(arr, start + 1, end, rank, p);
 
-       swap(arr, start, i); /* restore element order */
+           swap(arr, start, i); /* restore element order */
 
-   }
+        }
+
+    }
 }
  
 
