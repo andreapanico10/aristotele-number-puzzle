@@ -1,0 +1,3 @@
+/Users/andrea/Desktop/Università/PARALLEL ALGORITHMS/PROGETTO/sequential_version/sequential_23122021/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/andrea/Desktop/Università/PARALLEL ALGORITHMS/PROGETTO/sequential_version/sequential_23122021/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/andrea/Desktop/Università/PARALLEL ALGORITHMS/PROGETTO/sequential_version/sequential_23122021/cmake-build-debug/CMakeFiles/sequential_23122021.dir

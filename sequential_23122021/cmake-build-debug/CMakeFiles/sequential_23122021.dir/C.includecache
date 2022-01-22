@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/andrea/Desktop/Università/PARALLEL ALGORITHMS/PROGETTO/sequential_version/sequential_23122021/main.c
+stdio.h
+-
+stdlib.h
+-
+sys/time.h
+-
+string.h
+-
+
